@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    <meta charset="UTF-8" />
+
+    <!-- build -->
+    <!-- <base href="." /> -->
+
+    <!-- server -->
+    <base href="/" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home</title>
+    <link rel="stylesheet" type="text/css" href="assets/css/index.css" />
+  </head>
+
+  <body>
+    <!-- Content -->
+    <section class="main container">
+      <button
+        class="btn btn-primary"
+        data-trigger="modal"
+        data-target=".modal-treatment-info"
+        aria-open="false"
+      >
+        Treatment Information
+      </button>
+
+      <button
+        class="btn btn-primary"
+        data-trigger="modal"
+        data-target=".modal-criteria-set"
+        aria-open="false"
+      >
+        Save Criteria Set
+      </button>
+
+
+      <!-- Treatment Information -->
+      <div class="modal modal-treatment-info">
+        <div class="modal__backdrop"></div>
+        <div class="modal__content xl">
+          <div class="modal__header d-flex align-items-center justify-content-between">
+            <h1>Treatment Information</h1>
+            <div>
+              <button type="button" class="btn btn-outline-primary" disabled>Clear All</button>
+            </div>
+          </div>
+          <div class="modal__main">
+            <div class="row justify-content-between">
+              <div class="col-6 col-md-12">
+                <div class="mb-3">
+                  <label for="exampleFormControlInput1" class="form-label">Email address</label>
+                  <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com" />
+                </div>
+                <div class="table-container">
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col"></th>
+                        <th scope="col">Treatment</th>
+                        <th scope="col">Description</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          <input class="form-check-input" type="checkbox" value="" />
+                        </td>
+                        <td class="fw-bold">012</td>
+                        <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                          eiusmod tempor incididunt ut labore et dolore magna aliqua.</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <input class="form-check-input" type="checkbox" value="" />
+                        </td>
+                        <td class="fw-bold">012</td>
+                        <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                          eiusmod tempor incididunt ut labore et dolore magna aliqua.</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <input class="form-check-input" type="checkbox" value="" />
+                        </td>
+                        <td class="fw-bold">012</td>
+                        <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                          eiusmod tempor incididunt ut labore et dolore magna aliqua.</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <input class="form-check-input" type="checkbox" value="" />
+                        </td>
+                        <td class="fw-bold">012</td>
+                        <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                          eiusmod tempor incididunt ut labore et dolore magna aliqua.</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <input class="form-check-input" type="checkbox" value="" />
+                        </td>
+                        <td class="fw-bold">012</td>
+                        <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                          eiusmod tempor incididunt ut labore et dolore magna aliqua.</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="col-6 col-md-12">
+                <div class="text-end">
+                  Select <strong>Treatments</strong> in left table to filter the <strong>Codes</strong> below <br/>
+                  (Needed for SRRS)
+                </div>
+                <div class="table-container">
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">Treatment Combinations</th>
+                        <th scope="col">Code</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit</td>
+                          <td class="fw-bold">OT</td>
+                      </tr>
+                      <tr>
+                        <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit</td>
+                          <td class="fw-bold">OT</td>
+                      </tr>
+                      <tr>
+                        <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit</td>
+                          <td class="fw-bold">OT</td>
+                      </tr>
+                      <tr>
+                        <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit</td>
+                          <td class="fw-bold">OT</td>
+                      </tr>
+                      <tr>
+                        <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit</td>
+                          <td class="fw-bold">OT</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal__footer">
+            <button type="button" class="btn btn-outline-primary modal__cancel">Cancel</button>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- Save Criteria Set -->
+      <div class="modal modal-criteria-set">
+        <div class="modal__backdrop"></div>
+        <div class="modal__content lg">
+          <div class="modal__header">
+            <h1>Save Criteria Set</h1>
+          </div>
+          <div class="modal__main">
+            <div>
+              <div>Your entered criteria can be saved and used to autofill futurer visits.</div>
+              <ul>
+                <li>Product: <strong>CC</strong></li>
+                <li>Lab: <strong>JHNLAB</strong></li>
+                <li>Category: <strong>WEBGE</strong></li>
+                <li>Contacts: <strong>Jenny Smith (abc7890), Ed Joones (qrs7890), Stephen Winters (xyuz1234)</strong></li>
+                <li>Job comments: </li>
+                <li>Selected Tests: <strong>CC4as2-R2 PST - (2 X 50), CCAA-R3 Acce;erated Aging (4 X 50)</strong></li>
+              </ul>
+            </div>
+            <hr/>
+            <div>
+              <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">Email address</label>
+                <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com" />
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                <label class="form-check-label" for="flexCheckDefault">
+                  Set as Default critera set
+                </label>
+              </div> 
+            </div>
+          </div>
+          <div class="modal__footer">
+            <button type="button" class="btn btn-outline-primary modal__cancel">Cancel</button>
+            <button type="button" class="btn btn-primary" disabled>Save</button>
+          </div>
+        </div>
+      </div>
+
+
+
+    </section>
+
+    <!-- CUSTOM -->
+    <script src="assets/js/script.js" defer></script>
+    <!-- CUSTOM -->
+  </body>
+</html>
