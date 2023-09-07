@@ -43,3 +43,10 @@ btnModals.forEach(btnModal => {
 /** 
  * END MODAL
 */
+
+
+document.getElementById('btnFilter').addEventListener('click', function (e) {
+  this.classList.toggle("active");
+  let filterContent = document.getElementById('filterContent');
+  filterContent.classList.toggle("active");
+});
