@@ -1,3 +1,6 @@
+/** 
+ * START MODAL
+*/
 // data-trigger: "modal" => Dựa vào trigger selector tất cả những thẻ nào có data-trigger='modal'
 // data-target: Mỗi một data-trigger sẽ select đến một bộ modal riêng (Phù hợp cho việc tái sử dụng)
 // aria-open: Khai báo trạng thái modal
@@ -36,3 +39,7 @@ btnModals.forEach(btnModal => {
     onActiveOrNot(btnModal, modal, !open);
   })
 })
+
+/** 
+ * END MODAL
+*/
