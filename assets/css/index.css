@@ -594,6 +594,7 @@ tr {
   display: flex;
   place-content: center;
   place-items: center;
+  min-height: 40px;
 }
 
 .btn-filter svg {
@@ -676,9 +677,18 @@ tr {
 .treatments-selected {
   width: 100%;
   background-color: #f0f3f4;
-  height: 40px;
+  min-height: 40px;
+  max-height: 110px;
+  overflow: auto;
   border-radius: 3px;
   padding: 8px 15px;
+
+  display: flex;
+  flex-wrap: wrap;
+  place-content: flex-start;
+  place-items: center;
+  align-self: flex-start;
+  gap: 5px;
 }
 
 .treatments-selected__item {
@@ -688,7 +698,6 @@ tr {
   color: #fff;
   padding: 3px 10px;
   display: inline-block;
-  margin-right: 5px;
 }
 
 .treatments-selected__item svg {
