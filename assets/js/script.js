@@ -49,29 +49,37 @@ let TABLE_DATAS = [
   {
     id: 1,
     treatment: '012',
-    descriptions: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
+    descriptions: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+    checked: false,
   },
   {
     id: 2,
     treatment: '013',
-    descriptions: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
+    descriptions: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+    checked: true,
   },
   {
     id: 3,
     treatment: '014',
-    descriptions: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
+    descriptions: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+    checked: true,
   },
   {
     id: 4,
     treatment: '015',
-    descriptions: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
+    descriptions: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+    checked: false,
   },
   {
     id: 5,
     treatment: '016',
-    descriptions: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
+    descriptions: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+    checked: false,
   },
 ];
+
+let TREATMENT_CHECKED = TABLE_DATAS.map(v => v.checked);
+
 const FILTER_TYPES = {
   TREATMENT: 'TREATMENT',
   DESCRIPTION: 'DESCRIPTION',
@@ -118,7 +126,7 @@ document.getElementById('filter').addEventListener('click', function (e) {
     imgnode.setAttribute('src', '/assets/icons/close.svg');
     imgnode.setAttribute('class', 'treatmentItemRemove');
     imgnode.onclick = function (e) {
-      treatmentItemRemove(FILTER_SELECT, e);
+      handleTreatmentItemRemove(FILTER_SELECT, e);
     }
     
     treatmentsSelectedItemChild.appendChild(textnode);
@@ -140,14 +148,22 @@ document.getElementById('filter').addEventListener('click', function (e) {
   }
 });
 
-function treatmentItemRemove(filter_select, e) {
-  console.log(filter_select)
+function handleTreatmentItemRemove(filter_select, e) {
   // remove item UI
   e.target.closest('.treatments-selected__item').remove();
   // remove filter array
   FILTERS_SELECTED = FILTERS_SELECTED.filter(v => !(v.value === filter_select.value && v.type === filter_select.type));
+  const _FIND_INDEX = TABLE_DATAS.findIndex(v => v.treatment === filter_select.value);
+  if(_FIND_INDEX >= 0) { // un-check TREATMENT_CHECKED
+    TREATMENT_CHECKED[_FIND_INDEX] = false;
+  }
   // filter table
   initialTable();
+}
+
+function handleTreatmentCheckboxChange(key, e) {
+  const checked = e.target.checked;
+  TREATMENT_CHECKED[key] = checked;
 }
 
 function initialTable() {
@@ -171,8 +187,11 @@ function initialTable() {
     formCheckInput.setAttribute('type', 'checkbox');
     // filter checked input 
     const _FIND_VALUE = FILTERS_SELECTED.find(v => v.value === data.treatment)
-    if (!!_FIND_VALUE) {
+    if (!!_FIND_VALUE || !!TREATMENT_CHECKED[key]) {
       formCheckInput.setAttribute('checked', 'checked');
+    }
+    formCheckInput.onchange = function (e) {
+      handleTreatmentCheckboxChange(key, e);
     }
     tdFormCheckInput.appendChild(formCheckInput);
 
