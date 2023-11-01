@@ -688,9 +688,21 @@ tr {
   color: #fff;
   padding: 3px 10px;
   display: inline-block;
+  margin-right: 5px;
 }
 
 .treatments-selected__item svg {
   fill: #fff;
   padding-left: 5px;
+}
+
+.treatments-selected__item span {
+  display: flex;
+  place-content: space-between;
+  place-items: center;
+  gap: 5px;
+}
+
+.treatments-selected__item span img{
+  cursor: pointer;
 }
