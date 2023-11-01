@@ -50,35 +50,30 @@ let TABLE_DATAS = [
     id: 1,
     treatment: '012',
     descriptions: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-    checked: false,
   },
   {
     id: 2,
     treatment: '013',
     descriptions: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-    checked: true,
   },
   {
     id: 3,
     treatment: '014',
     descriptions: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-    checked: true,
   },
   {
     id: 4,
     treatment: '015',
     descriptions: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-    checked: false,
   },
   {
     id: 5,
     treatment: '016',
     descriptions: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-    checked: false,
   },
 ];
 
-let TREATMENT_CHECKED = TABLE_DATAS.map(v => v.checked);
+let TREATMENT_CHECKED = [];
 
 const FILTER_TYPES = {
   TREATMENT: 'TREATMENT',
@@ -117,31 +112,17 @@ document.getElementById('filter').addEventListener('click', function (e) {
     let filterContent = document.getElementById('filterContent');
     filterContent.classList.toggle("active");
 
-    const treatmentsSelected = document.getElementsByClassName('treatments-selected')[0];
-
-    // create child node
-    const treatmentsSelectedItemChild = document.createElement("span");
-    const textnode = document.createTextNode(_filter_value);
-    const imgnode = document.createElement('img');
-    imgnode.setAttribute('src', '/assets/icons/close.svg');
-    imgnode.setAttribute('class', 'treatmentItemRemove');
-    imgnode.onclick = function (e) {
-      handleTreatmentItemRemove(FILTER_SELECT, e);
+    const _FIND_FILTERS_SELECTED = FILTERS_SELECTED.find(v => v.value === FILTER_SELECT.value && v.type === FILTER_SELECT.type);
+    if(!_FIND_FILTERS_SELECTED) {
+      // set filters
+      FILTERS_SELECTED = [ 
+        ...FILTERS_SELECTED, 
+        FILTER_SELECT,
+      ];
     }
-    
-    treatmentsSelectedItemChild.appendChild(textnode);
-    treatmentsSelectedItemChild.appendChild(imgnode);
-    
-    const treatmentsSelectedItem = document.createElement("span");
-    treatmentsSelectedItem.className = 'treatments-selected__item';
-    treatmentsSelectedItem.appendChild(treatmentsSelectedItemChild);
 
-    treatmentsSelected.appendChild(treatmentsSelectedItem);
-
-    FILTERS_SELECTED = [ 
-      ...FILTERS_SELECTED, 
-      FILTER_SELECT,
-    ];
+    // update treatments Selected item
+    initialTreatmentsSelected();
 
     // filter table
     initialTable();
@@ -161,9 +142,58 @@ function handleTreatmentItemRemove(filter_select, e) {
   initialTable();
 }
 
-function handleTreatmentCheckboxChange(key, e) {
+function handleTreatmentCheckboxChange(value, e) {
   const checked = e.target.checked;
-  TREATMENT_CHECKED[key] = checked;
+  const _FIND_FILTERS_SELECTED = FILTERS_SELECTED.find(v => v.value === value && v.type === FILTER_TYPES.TREATMENT);
+  // add item
+  if (checked && !_FIND_FILTERS_SELECTED) {
+    FILTERS_SELECTED = [
+      ...FILTERS_SELECTED,
+      {
+        type: FILTER_TYPES.TREATMENT,
+        value
+      }
+    ];
+  }
+
+  // remove item
+  if (!checked && !!_FIND_FILTERS_SELECTED) {
+    FILTERS_SELECTED = FILTERS_SELECTED.filter(v => !(v.value === value && v.type === FILTER_TYPES.TREATMENT));
+  }
+
+  // update treatments Selected item
+  initialTreatmentsSelected();
+
+  // filter table
+  initialTable();
+}
+
+function initialTreatmentsSelected() {
+  const treatmentsSelected = document.getElementsByClassName('treatments-selected')[0];
+  // remove all child
+  treatmentsSelected.innerHTML = '';
+
+  FILTERS_SELECTED.forEach(function (data, key) {
+    const treatmentsSelectedItemChild = document.createElement("span");
+    treatmentsSelectedItemChild.setAttribute('data-key', key);
+    
+    const textnode = document.createTextNode(data.value);
+    const imgnode = document.createElement('img');
+    imgnode.setAttribute('src', '/assets/icons/close.svg');
+    imgnode.setAttribute('class', 'treatmentItemRemove');
+    imgnode.onclick = function (e) {
+      handleTreatmentItemRemove(data, e);
+    }
+    
+    treatmentsSelectedItemChild.appendChild(textnode);
+    treatmentsSelectedItemChild.appendChild(imgnode);
+    
+    const treatmentsSelectedItem = document.createElement("span");
+    treatmentsSelectedItem.className = 'treatments-selected__item';
+    treatmentsSelectedItem.appendChild(treatmentsSelectedItemChild);
+  
+    treatmentsSelected.appendChild(treatmentsSelectedItem);
+  });
 }
 
 function initialTable() {
@@ -191,7 +221,7 @@ function initialTable() {
       formCheckInput.setAttribute('checked', 'checked');
     }
     formCheckInput.onchange = function (e) {
-      handleTreatmentCheckboxChange(key, e);
+      handleTreatmentCheckboxChange(data.treatment, e);
     }
     tdFormCheckInput.appendChild(formCheckInput);
 
